@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Loading_Screen.gd" type="Script" id=1]
+
+[node name="Loading_Screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.49829
+margin_top = -1.49829
+margin_right = -1.49829
+margin_bottom = -1.49829
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+
+[node name="Start_level_Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.983
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.8281
+margin_top = -252.109
+margin_right = 20.1719
+margin_bottom = -242.309
+text = "Start"
+
+[connection signal="pressed" from="Start_level_Button" to="." method="_on_Start_level_Button_pressed"]

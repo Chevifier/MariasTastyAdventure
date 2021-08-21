@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gameobjects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/world_chunks.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://gameobjects/enemies/MisterBug/misterbug.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameobjects/pickups/cake.tscn" type="PackedScene" id=4]
+
+[node name="level1" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.629998, 0, -0.776596, 0, 1, 0, 0.776596, 0, 0.629998, 38.5201, 2.98883, -44.6083 )
+
+[node name="cake" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99.7901, 4.15183, -63.1563 )
+
+[node name="misterbug" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.436456, 0, 0.899726, 0, 1, 0, -0.899726, 0, 0.436456, 49.5298, 1.83627, -36.4343 )
+
+[node name="misterbug2" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.229047, 0, 0.973415, 0, 1, 0, -0.973415, 0, -0.229047, 48.7479, 1.85421, -43.0854 )
+
+[node name="misterbug3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.70477, 0, 0.709435, 0, 1, 0, -0.709435, 0, 0.70477, 41.0352, 1.82288, -40.2981 )
+
+[node name="misterbug4" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.723931, 0, 0.689872, 0, 1, 0, -0.689872, 0, -0.723931, 41.0448, 1.85792, -47.4875 )
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+cell_size = Vector3( 1, 1, 1 )
+data = {
+"cells": PoolIntArray( 65583, 65469, 0, 65587, 65469, 0, 65583, 65470, 0, 65593, 65472, 0, 65599, 65472, 0, 65605, 65472, 0, 65611, 65472, 0, 65617, 65472, 0, 65623, 65472, 0, 65624, 65472, 0, 65629, 65472, 0, 65635, 65472, 0, 65583, 65473, 0, 65587, 65474, 0, 65578, 65479, 0, 65583, 65479, 0, 65585, 65479, 0, 65590, 65479, 0, 65568, 65480, 0, 65573, 65480, 0, 65574, 65485, 0, 65579, 65485, 0, 65584, 65485, 0, 65590, 65485, 0, 65568, 65486, 0, 65572, 65487, 0, 65578, 65491, 0, 65584, 65491, 0, 65590, 65491, 0, 65567, 65492, 0, 65573, 65492, 0, 65559, 65494, 0, 65579, 65497, 0, 65582, 65497, 0, 65583, 65497, 0, 65584, 65497, 0, 65575, 65498, 0, 65581, 65498, 0, 65582, 65498, 0, 65583, 65498, 0, 65584, 65498, 0, 65575, 65499, 0, 65575, 65500, 0, 65575, 65501, 0, 65575, 65502, 0, 65559, 65503, 0, 65575, 65503, 0, 65575, 65504, 0, 65575, 65505, 0, 65575, 65506, 0, 65575, 65507, 0, 65575, 65508, 0, 65575, 65509, 0, 65575, 65510, 0, 65575, 65511, 0, 65575, 65512, 0, 65574, 65513, 0, 65575, 65513, 0, 65574, 65514, 0, 65574, 65515, 0, 65574, 65516, 0, 65540, 65522, 0, 65545, 65522, 0, 65550, 65522, 0, 65555, 65522, 0, 65559, 65522, 0, 65564, 65522, 0, 65567, 65522, 0, 65572, 65522, 0, 65540, 65528, 0, 131071, 65528, 0, 65540, 65534, 0, 131071, 65534, 0, 131069, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 1, 0 )
+}

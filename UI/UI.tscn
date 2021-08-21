@@ -1,0 +1,321 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://UI/d_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/d_font_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/candy_icon.png" type="Texture" id=3]
+[ext_resource path="res://UI/hp_gauge.png" type="Texture" id=4]
+[ext_resource path="res://UI/hp_bg.png" type="Texture" id=5]
+[ext_resource path="res://UI/button_white.png" type="BitMap" id=6]
+[ext_resource path="res://UI/super_mario_256/SuperMario256.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://UI/button_blue.png" type="Texture" id=8]
+[ext_resource path="res://UI/UI.gd" type="Script" id=9]
+[ext_resource path="res://UI/button.gd" type="Script" id=10]
+[ext_resource path="res://UI/cake_icon.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+font_data = ExtResource( 7 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureButton
+
+var tween : Tween
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	tween = Tween.new()
+	add_child(tween)
+	connect(\"mouse_entered\",self,\"animate_entered\")
+	connect(\"mouse_exited\",self,\"animate_exit\")
+
+
+func animate_entered():
+	tween.interpolate_property(self,\"rect_scale\",Vector2(1,1),Vector2(1.2,1.2),0.2)
+	tween.start()
+	
+	
+func animate_exit():
+	tween.interpolate_property(self,\"rect_scale\",Vector2(1.2,1.2),Vector2(1,1),0.2)
+	tween.start()
+"
+
+[sub_resource type="DynamicFont" id=3]
+size = 26
+font_data = ExtResource( 7 )
+
+[node name="UI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 9 )
+
+[node name="Game_Running" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player_HP" type="TextureProgress" parent="Game_Running"]
+anchor_left = 0.401855
+anchor_right = 0.5
+anchor_bottom = 0.163333
+margin_left = 0.000488281
+margin_right = 100.5
+margin_bottom = 98.0002
+rect_scale = Vector2( 0.5, 0.5 )
+max_value = 8.0
+value = 8.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+fill_mode = 5
+radial_center_offset = Vector2( 0, 9.009 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="score_lbl" type="Label" parent="Game_Running"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -224.974
+margin_top = 14.1323
+margin_right = -11.9742
+margin_bottom = 60.1323
+custom_fonts/font = ExtResource( 1 )
+text = "SCORE: 0"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="h" type="HBoxContainer" parent="Game_Running"]
+margin_right = 711.0
+margin_bottom = 134.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="coin_icon" type="TextureRect" parent="Game_Running/h"]
+margin_right = 136.0
+margin_bottom = 134.0
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Game_Running/h"]
+margin_left = 140.0
+margin_top = 27.0
+margin_right = 711.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "0000"
+
+[node name="Cake_Collected" type="Control" parent="Game_Running"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game_Running/Cake_Collected"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -121.0
+margin_top = -67.5
+margin_right = 121.0
+margin_bottom = 67.5
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Game_Running/Cake_Collected/HBoxContainer"]
+margin_right = 130.0
+margin_bottom = 135.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 1
+
+[node name="cake_col_label" type="Label" parent="Game_Running/Cake_Collected/HBoxContainer"]
+margin_left = 134.0
+margin_top = 44.0
+margin_right = 242.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 1 )
+text = "0/10"
+
+[node name="Game_Paused" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause_label" type="Label" parent="Game_Paused"]
+anchor_right = 1.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "PAUSED"
+align = 1
+valign = 1
+
+[node name="v" type="VBoxContainer" parent="Game_Paused"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -32.0
+margin_right = 100.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume_button" type="TextureButton" parent="Game_Paused/v"]
+margin_right = 200.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 100, 32 )
+texture_normal = ExtResource( 8 )
+texture_click_mask = ExtResource( 6 )
+script = SubResource( 2 )
+
+[node name="Label" type="Label" parent="Game_Paused/v/Resume_button"]
+margin_left = 40.2596
+margin_top = 21.1893
+margin_right = 156.26
+margin_bottom = 48.1893
+custom_fonts/font = SubResource( 3 )
+text = "RESUME"
+align = 1
+valign = 1
+
+[node name="Quit_Button" type="TextureButton" parent="Game_Paused/v"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+rect_pivot_offset = Vector2( 100, 32 )
+texture_normal = ExtResource( 8 )
+texture_click_mask = ExtResource( 6 )
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Game_Paused/v/Quit_Button"]
+margin_left = 40.2596
+margin_top = 21.1893
+margin_right = 156.26
+margin_bottom = 48.1893
+custom_fonts/font = SubResource( 3 )
+text = "QUIT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game_Over" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameover_label" type="Label" parent="Game_Over"]
+anchor_right = 1.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "GAME OVER"
+align = 1
+valign = 1
+
+[node name="v" type="VBoxContainer" parent="Game_Over"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -32.0
+margin_right = 100.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry_button" type="TextureButton" parent="Game_Over/v"]
+margin_right = 200.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 8 )
+texture_click_mask = ExtResource( 6 )
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Game_Over/v/Retry_button"]
+margin_left = 40.2596
+margin_top = 21.1893
+margin_right = 156.26
+margin_bottom = 48.1893
+custom_fonts/font = SubResource( 3 )
+text = "RETRY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit_Button" type="TextureButton" parent="Game_Over/v"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture_normal = ExtResource( 8 )
+texture_click_mask = ExtResource( 6 )
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Game_Over/v/Quit_Button"]
+margin_left = 40.2596
+margin_top = 21.1893
+margin_right = 156.26
+margin_bottom = 48.1893
+custom_fonts/font = SubResource( 3 )
+text = "QUIT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game_Complete" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.41577
+margin_top = 1.80678
+margin_right = -1.41577
+margin_bottom = 1.80676
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="complete_label" type="Label" parent="Game_Complete"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -60.0
+margin_right = 512.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 1 )
+text = "COMPLETE"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="Game_Paused/v/Resume_button" to="." method="_on_Resume_button_pressed"]
+[connection signal="pressed" from="Game_Paused/v/Quit_Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="Game_Over/v/Retry_button" to="." method="_on_Retry_button_pressed"]
+[connection signal="pressed" from="Game_Over/v/Quit_Button" to="." method="_on_Quit_Button_pressed"]
